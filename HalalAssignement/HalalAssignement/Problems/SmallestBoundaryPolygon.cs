@@ -7,7 +7,7 @@ namespace HalalAssignement.Problems
 {
     internal class SmallestBoundaryPolygon
     {
-        protected List<Vector2> points = new List<Vector2>();
+        public List<Vector2> points = new List<Vector2>();
 
         protected double DistanceFromLine(Vector2 lp1, Vector2 lp2, Vector2 p)
         {
@@ -49,7 +49,7 @@ namespace HalalAssignement.Problems
             return sumLength;
         }
 
-        protected double Objective(List<Vector2> solution)
+        public double Objective(List<Vector2> solution)
         {
             return BoundaryLength(solution);
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HalalAssignement.Implementations;
+using System;
+using System.IO;
 
 namespace HalalAssignement
 {
@@ -6,7 +8,14 @@ namespace HalalAssignement
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var gen = new Random();
+
+            var pointsPath = Directory.GetCurrentDirectory() + @"/TestData/Points.txt";
+
+            var boundary = new BoundaryWithHillClimb();
+            boundary.Init(pointsPath, gen);
+            boundary.Run();
+            Console.WriteLine($"smallest boundary polygon result: {boundary.Result}");
         }
     }
 }
