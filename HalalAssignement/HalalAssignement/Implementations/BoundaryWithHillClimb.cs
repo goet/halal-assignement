@@ -3,7 +3,6 @@ using HalalAssignement.Solvers;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
 
 namespace HalalAssignement.Implementations
 {
@@ -26,7 +25,7 @@ namespace HalalAssignement.Implementations
 
             hillClimb.gen = gen;
             hillClimb.Epsilon = Math.PI;
-            hillClimb.MaxIterations = 50;
+            hillClimb.MaxIterations = 100;
 
             hillClimb.Fitness = (solution) => smallestBoundary.Objective(solution);
             hillClimb.LowerFitnessIsBetter();
