@@ -1,0 +1,11 @@
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\bin\Debug\netcoreapp2.1\HalalAssignement.deps.json
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\bin\Debug\netcoreapp2.1\HalalAssignement.runtimeconfig.json
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\bin\Debug\netcoreapp2.1\HalalAssignement.runtimeconfig.dev.json
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\bin\Debug\netcoreapp2.1\HalalAssignement.dll
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\bin\Debug\netcoreapp2.1\HalalAssignement.pdb
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.csprojAssemblyReference.cache
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.csproj.CoreCompileInputs.cache
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.AssemblyInfoInputs.cache
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.AssemblyInfo.cs
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.dll
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.pdb
