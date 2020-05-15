@@ -1,4 +1,5 @@
 ﻿using HalalAssignement.Implementations;
+using HalalAssignement.Utils;
 using System;
 using System.IO;
 
@@ -10,10 +11,8 @@ namespace HalalAssignement
         {
             var gen = new Random();
 
-            var pointsPath = Directory.GetCurrentDirectory() + @"/TestData/Points.txt";
-
             var boundary = new BoundaryWithHillClimb();
-            boundary.Init(pointsPath, gen);
+            boundary.Init(DataDir.Points, gen);
             boundary.Run();
             Console.WriteLine($"smallest boundary polygon result: {boundary.Result}");
         }

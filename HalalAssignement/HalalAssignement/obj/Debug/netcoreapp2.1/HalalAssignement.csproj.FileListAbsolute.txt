@@ -10,3 +10,4 @@ D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netco
 D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.dll
 D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\obj\Debug\netcoreapp2.1\HalalAssignement.pdb
 D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\bin\Debug\netcoreapp2.1\TestData\Points.txt
+D:\uni\halal\halal-assignement\HalalAssignement\HalalAssignement\bin\Debug\netcoreapp2.1\TestData\FuncAppr1.txt
