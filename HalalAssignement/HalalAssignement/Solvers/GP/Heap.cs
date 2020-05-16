@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace HalalAssignement.Solvers.GP
 {
@@ -73,6 +74,18 @@ namespace HalalAssignement.Solvers.GP
                 return heads.Dequeue();
 
             return tails.Dequeue();
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            foreach (var item in Head)
+            {
+                sb.Append($"|{item.ToString()}|");
+            }
+
+            return sb.ToString();
         }
     }
 }

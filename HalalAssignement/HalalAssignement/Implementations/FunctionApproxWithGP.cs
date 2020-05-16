@@ -12,22 +12,25 @@ namespace HalalAssignement.Implementations
         private GeneticProgramming gp;
         private FunctionApproximation functionA;
 
-        public void Init(Random gen)
+        public double Result { get; set; }
+
+        public void Init(string path, Random gen)
         {
             functionA = new FunctionApproximation();
-            functionA.LoadKnownValuesFromFile(DataDir.FuncAppr);
+            functionA.LoadKnownValuesFromFile(path);
 
-            int headSize = 5;
-            gp = new GeneticProgramming(gen, 5);
-            gp.PopSize = 5000;
-            gp.ElitismCount = 500;
-            gp.MutationCount = 10;
+            int headSize = 10;
+            gp = new GeneticProgramming(gen, headSize, new string[] { "x" } );
+            gp.PopSize = 10000;
+            gp.ElitismCount = 1000;
+            gp.MutationCount = 1000;
             gp.Inputs = functionA.knownValues;
         }
 
         public double Solve(int maxCycles)
         {
             var result = gp.Solve(maxCycles);
+            Result = result;
             return result;
         }
     }

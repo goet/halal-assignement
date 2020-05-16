@@ -9,10 +9,10 @@ namespace HalalAssignement.Solvers.GP
         public NodeGenerator nodeGenerator;
         private Random gen;
 
-        public HeapGenerator(int headSize, Random gen)
+        public HeapGenerator(int headSize, string[] possibleInputVarNames, Random gen)
         {
             HeadSize = headSize;
-            nodeGenerator = new NodeGenerator(gen);
+            nodeGenerator = new NodeGenerator(gen, possibleInputVarNames);
             this.gen = gen;
         }
 

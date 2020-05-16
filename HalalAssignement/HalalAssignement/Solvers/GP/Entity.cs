@@ -38,5 +38,10 @@ namespace HalalAssignement.Solvers.GP
                 Gene = offspringGene,
             };
         }
+
+        public override string ToString()
+        {
+            return Gene.ToString();
+        }
     }
 }

@@ -17,5 +17,18 @@
 
             return Operation.Apply(Left, Right);
         }
+
+        public override string ToString()
+        {
+            if (IsTerminal)
+            {
+                if (InputId == default)
+                    return ConstantValue.ToString("F2");
+
+                return InputId;
+            }
+
+            return Operation.ToString();
+        }
     }
 }

@@ -20,9 +20,9 @@ namespace HalalAssignement.Solvers
         private HeapGenerator heapGenerator;
         private Random gen;
 
-        public GeneticProgramming(Random gen, int headsize)
+        public GeneticProgramming(Random gen, int headsize, string[] possibleInputVarNames)
         {
-            heapGenerator = new HeapGenerator(headsize, gen);
+            heapGenerator = new HeapGenerator(headsize, possibleInputVarNames, gen);
             this.gen = gen;
         }
 
@@ -33,6 +33,8 @@ namespace HalalAssignement.Solvers
             double bestFitness = double.MaxValue;
             for (int i = 0; i < maxCycles; i++)
             {
+                ResetFitness();
+
                 for (int j = 0; j < Inputs.Count; j++)
                 {
                     Evaluate(Inputs[j]);
@@ -40,6 +42,12 @@ namespace HalalAssignement.Solvers
                 }
 
                 bestFitness = DetermineBestIndividualFitness();
+                Console.WriteLine($"{i}: lowest avg error: {bestFitness} from gene:");
+                Console.WriteLine($"\t head: {Leader.ToString()}");
+
+                Leader.Gene.ToValidTree(out Node root);
+                root.CalculateValue();
+
                 if (bestFitness <= MinAcceptableFitness)
                     return bestFitness;
 
@@ -99,6 +107,14 @@ namespace HalalAssignement.Solvers
             }
         }
 
+        private void ResetFitness()
+        {
+            foreach (var entity in population)
+            {
+                entity.Fitness = 0;
+            }
+        }
+
         private double DetermineBestIndividualFitness()
         {
             var bestFitness = double.MaxValue;
@@ -132,7 +148,10 @@ namespace HalalAssignement.Solvers
 
             for (int i = 0; i < population.Length; i++)
             {
-                population[i].Gene = heaps[i];
+                population[i] = new Entity()
+                {
+                    Gene = heaps[i]
+                };
             }
         }
     }

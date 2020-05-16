@@ -6,13 +6,14 @@ namespace HalalAssignement.Solvers.GP
     {
         private Random gen;
 
-        public double MaxConstantValue { get; set; } = 100;
+        public double MaxConstantValue { get; set; } = 10;
         public double MinConstantValue { get; set; } = 2;
         public string[] PossibleInputVars { get; set; }
 
-        public NodeGenerator(Random gen)
+        public NodeGenerator(Random gen, string[] possibleInputvars)
         {
             this.gen = gen;
+            PossibleInputVars = possibleInputvars;
         }
 
         public Node GenerateTerminal()
@@ -42,14 +43,16 @@ namespace HalalAssignement.Solvers.GP
 
             var n = new Node();
 
-            if (roll <= .25)
+            if (roll <= .2)
                 n.Operation = new Sum();
-            else if (roll <= .5)
+            else if (roll <= .4)
                 n.Operation = new Sub();
-            else if (roll <= .75)
+            else if (roll <= .6)
                 n.Operation = new Mul();
-            else
+            else if (roll <= .8)
                 n.Operation = new Div();
+            else
+                n.Operation = new Pow();
 
             return n;
         }
