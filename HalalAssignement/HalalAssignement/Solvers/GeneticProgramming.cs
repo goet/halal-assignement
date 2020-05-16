@@ -9,7 +9,6 @@ namespace HalalAssignement.Solvers
     public class GeneticProgramming
     {
         public int PopSize { get; set; }
-        public int MateCount { get; set; }
         public int ElitismCount { get; set; }
         public int MutationCount { get; set; }
         public double MinAcceptableFitness { get; set; } = 0.1;
@@ -37,15 +36,16 @@ namespace HalalAssignement.Solvers
                 for (int j = 0; j < Inputs.Count; j++)
                 {
                     Evaluate(Inputs[j]);
-                    DetermineFitness(Inputs[j].Output, ref bestFitness);
-
-                    if (bestFitness <= MinAcceptableFitness)
-                        return bestFitness;
-
-                    var survivors = SelectSurvivals();
-                    Reproduce(survivors);
-                    Mutate();
+                    DetemineFitness(Inputs[j].Output);
                 }
+
+                bestFitness = DetermineBestIndividualFitness();
+                if (bestFitness <= MinAcceptableFitness)
+                    return bestFitness;
+
+                var survivors = SelectSurvivors();
+                Reproduce(survivors);
+                Mutate();
             }
 
             return bestFitness;
@@ -81,7 +81,7 @@ namespace HalalAssignement.Solvers
             }
         }
 
-        private List<Entity> SelectSurvivals()
+        private List<Entity> SelectSurvivors()
         {
             population = population.OrderByDescending(x => x.Fitness).ToArray();
             var luckyOnes = gen.Next(0, population.Length - ElitismCount - 1);
@@ -90,18 +90,29 @@ namespace HalalAssignement.Solvers
             return survivors.ToList();
         }
 
-        private void DetermineFitness(double expected, ref double bestFitness)
+        private void DetemineFitness(double expected)
         {
             foreach (var entity in population)
             {
                 var error = Math.Abs(expected - entity.Value);
+                entity.Fitness += error;
+            }
+        }
 
-                if (error < bestFitness)
+        private double DetermineBestIndividualFitness()
+        {
+            var bestFitness = double.MaxValue;
+            foreach (var entity in population)
+            {
+                entity.Fitness = entity.Fitness / (double)Inputs.Count;
+                if (entity.Fitness < bestFitness)
                 {
                     Leader = entity;
-                    bestFitness = error;
+                    bestFitness = entity.Fitness;
                 }
             }
+
+            return bestFitness;
         }
 
         private void Evaluate(ValuePair knownValue)

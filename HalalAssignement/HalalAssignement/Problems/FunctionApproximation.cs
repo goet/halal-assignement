@@ -6,7 +6,7 @@ namespace HalalAssignement.Problems
 {
     public class FunctionApproximation
     {
-        private List<ValuePair> knownValues = new List<ValuePair>();
+        public List<ValuePair> knownValues = new List<ValuePair>();
 
         public float Objective(List<float> coefficients)
         {
