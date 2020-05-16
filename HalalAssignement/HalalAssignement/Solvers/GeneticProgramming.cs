@@ -12,7 +12,7 @@ namespace HalalAssignement.Solvers
         public int MateCount { get; set; }
         public int ElitismCount { get; set; }
         public int MutationCount { get; set; }
-        public double MinAcceptableFitness { get; set; } = 0.1;
+        public double MinAcceptableFitness { get; set; } = 10;
         public List<ValuePair> Inputs { get; set; }
 
         public Entity Leader { get; private set; }
@@ -115,7 +115,7 @@ namespace HalalAssignement.Solvers
             {
                 for (int j = 0; j < possibleMates.Length; j++)
                 {
-                    if (possibleMates[i].Fitness > possibleMates[j].Fitness)
+                    if (possibleMates[i].Fitness < possibleMates[j].Fitness)
                         mates.Add(possibleMates[i]);
                     else
                         mates.Add(possibleMates[j]);
