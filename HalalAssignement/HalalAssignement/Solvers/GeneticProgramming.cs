@@ -9,6 +9,7 @@ namespace HalalAssignement.Solvers
     public class GeneticProgramming
     {
         public int PopSize { get; set; }
+        public int MateCount { get; set; }
         public int ElitismCount { get; set; }
         public int MutationCount { get; set; }
         public double MinAcceptableFitness { get; set; } = 0.1;
@@ -51,7 +52,10 @@ namespace HalalAssignement.Solvers
                 if (bestFitness <= MinAcceptableFitness)
                     return bestFitness;
 
-                var survivors = SelectSurvivors();
+                //var survivors = SelectSurvivors();
+                var survivors = SelectMates();
+                var elites = GetElites();
+                survivors.AddRange(elites);
                 Reproduce(survivors);
                 Mutate();
             }
@@ -69,33 +73,56 @@ namespace HalalAssignement.Solvers
             }
         }
 
-        private void Reproduce(List<Entity> survivors)
+        private Entity[] Reproduce(List<Entity> succesfuls)
         {
-            var start = survivors.Count;
+            var start = succesfuls.Count;
+            var newPopulation = new List<Entity>(succesfuls);
             for (int i = start; i < PopSize; i++)
             {
-                var roll = gen.Next(0, survivors.Count - 1);
-                var parentA = survivors[roll];
-                // make sure two seperate entities reproduce
-                survivors.RemoveAt(roll);
+                var roll = gen.Next(0, succesfuls.Count - 1);
+                var parentA = succesfuls[roll];
 
-                roll = gen.Next(0, survivors.Count - 1);
-                var parentB = survivors[roll];
+                roll = gen.Next(0, succesfuls.Count - 1);
+                var parentB = succesfuls[roll];
 
                 var offspring = parentA.Cross(parentB, gen);
 
-                population[i] = offspring;
-                survivors.Add(parentA);
+                newPopulation.Add(offspring);
             }
+            return newPopulation.ToArray();
         }
 
-        private List<Entity> SelectSurvivors()
+        private List<Entity> GetElites()
         {
             population = population.OrderByDescending(x => x.Fitness).ToArray();
-            var luckyOnes = gen.Next(0, population.Length - ElitismCount - 1);
-            var survivors = new Entity[ElitismCount + luckyOnes];
-            Array.Copy(population, 0, survivors, 0, ElitismCount + luckyOnes);
-            return survivors.ToList();
+            //var luckyOnes = gen.Next(0, population.Length - ElitismCount - 1 / 2);
+            var elites = new Entity[ElitismCount];
+            Array.Copy(population, 0, elites, 0, ElitismCount);
+            return elites.ToList();
+        }
+
+        private List<Entity> SelectMates()
+        {
+            var possibleMates = new Entity[MateCount];
+            for (int i = 0; i < possibleMates.Length; i++)
+            {
+                var roll = gen.Next(0, population.Length - 1);
+                possibleMates[i] = population[roll];
+            }
+
+            var mates = new List<Entity>();
+            for (int i = 0; i < possibleMates.Length; i++)
+            {
+                for (int j = 0; j < possibleMates.Length; j++)
+                {
+                    if (possibleMates[i].Fitness > possibleMates[j].Fitness)
+                        mates.Add(possibleMates[i]);
+                    else
+                        mates.Add(possibleMates[j]);
+                }
+            }
+
+            return mates;
         }
 
         private void DetemineFitness(double expected)

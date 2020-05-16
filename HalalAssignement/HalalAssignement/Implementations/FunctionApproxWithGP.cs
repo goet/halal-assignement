@@ -1,9 +1,6 @@
 ﻿using HalalAssignement.Problems;
 using HalalAssignement.Solvers;
-using HalalAssignement.Utils;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HalalAssignement.Implementations
 {
@@ -20,9 +17,10 @@ namespace HalalAssignement.Implementations
             functionA.LoadKnownValuesFromFile(path);
 
             int headSize = 10;
-            gp = new GeneticProgramming(gen, headSize, new string[] { "x" } );
+            gp = new GeneticProgramming(gen, headSize, new string[] { "x" });
             gp.PopSize = 10000;
-            gp.ElitismCount = 1000;
+            gp.ElitismCount = 10;
+            gp.MateCount = 4000;
             gp.MutationCount = 1000;
             gp.Inputs = functionA.knownValues;
         }

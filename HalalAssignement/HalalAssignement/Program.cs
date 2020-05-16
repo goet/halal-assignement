@@ -21,7 +21,7 @@ namespace HalalAssignement
             Console.WriteLine("initialising gp");
             functionApprox.Init(DataDir.FuncAppr, gen);
             Console.WriteLine("running gp");
-            functionApprox.Solve(1000);
+            functionApprox.Solve(100);
             Console.WriteLine($"smallest error in final generation: {functionApprox.Result}");
         }
     }
