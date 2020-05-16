@@ -30,10 +30,11 @@ namespace HalalAssignement.Solvers.GP
 
         public Heap Generate()
         {
-            var heap = new Heap(HeadSize, HeadSize * 2);
+            var genomeSize = gen.Next(3, HeadSize);
+            var heap = new Heap(genomeSize, genomeSize * 2);
 
             // heads
-            for (int i = 0; i < HeadSize; i++)
+            for (int i = 0; i < genomeSize; i++)
             {
                 var roll = gen.NextDouble();
 
@@ -54,7 +55,7 @@ namespace HalalAssignement.Solvers.GP
             }
 
             // tail
-            for (int i = 0; i < HeadSize * 2; i++)
+            for (int i = 0; i < genomeSize * 2; i++)
             {
                 var n = nodeGenerator.GenerateTerminal();
                 heap.Tail[i] = n;

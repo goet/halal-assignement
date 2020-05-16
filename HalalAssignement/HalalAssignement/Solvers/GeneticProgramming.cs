@@ -43,7 +43,7 @@ namespace HalalAssignement.Solvers
                 }
 
                 bestFitness = DetermineBestIndividualFitness();
-                Console.WriteLine($"{i}: lowest avg error: {bestFitness} from gene:");
+                Console.WriteLine($"{i}: avg error lowest: {bestFitness} from gene:");
                 Console.WriteLine($"\t head: {Leader.ToString()}");
 
                 Leader.Gene.ToValidTree(out Node root);
@@ -94,7 +94,7 @@ namespace HalalAssignement.Solvers
 
         private List<Entity> GetElites()
         {
-            population = population.OrderByDescending(x => x.Fitness).ToArray();
+            population = population.OrderBy(x => x.Fitness).ToArray();
             //var luckyOnes = gen.Next(0, population.Length - ElitismCount - 1 / 2);
             var elites = new Entity[ElitismCount];
             Array.Copy(population, 0, elites, 0, ElitismCount);
@@ -147,7 +147,7 @@ namespace HalalAssignement.Solvers
             var bestFitness = double.MaxValue;
             foreach (var entity in population)
             {
-                entity.Fitness = entity.Fitness / (double)Inputs.Count;
+                entity.Fitness = entity.Fitness / Inputs.Count;
                 if (entity.Fitness < bestFitness)
                 {
                     Leader = entity;
