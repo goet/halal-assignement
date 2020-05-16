@@ -53,5 +53,15 @@ namespace HalalAssignement.Solvers.GP
 
             return n;
         }
+
+        public Node Generate()
+        {
+            var roll = gen.NextDouble();
+
+            if (roll < .5)
+                return GenerateFunction();
+            else
+                return GenerateTerminal();
+        }
     }
 }

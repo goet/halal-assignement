@@ -6,7 +6,7 @@ namespace HalalAssignement.Solvers.GP
     {
         public int HeadSize { get; set; }
 
-        private NodeGenerator nodeGenerator;
+        public NodeGenerator nodeGenerator;
         private Random gen;
 
         public HeapGenerator(int headSize, Random gen)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace HalalAssignement.Solvers.GP
 {
@@ -48,6 +49,21 @@ namespace HalalAssignement.Solvers.GP
                 if (!p2.IsTerminal)
                     headsWithoutTails.Enqueue(p2);
                 
+            }
+        }
+
+        public void ReplaceRandom(Node node, Random gen)
+        {
+            var roll = gen.NextDouble();
+            if (!node.IsTerminal || roll < .5)
+            {
+                var index = gen.Next(0, Head.Length - 1);
+                Head[index] = node;
+            }
+            else
+            {
+                var index = gen.Next(0, Tail.Length - 1);
+                Tail[index] = node;
             }
         }
 
