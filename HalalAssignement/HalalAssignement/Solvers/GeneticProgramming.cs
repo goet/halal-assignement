@@ -43,11 +43,8 @@ namespace HalalAssignement.Solvers
                 }
 
                 bestFitness = DetermineBestIndividualFitness();
-                Console.WriteLine($"{i}: avg error lowest: {bestFitness} from gene:");
+                Console.WriteLine($"{i}: lowest avg error: {bestFitness} from gene:");
                 Console.WriteLine($"\t head: {Leader.ToString()}");
-
-                Leader.Gene.ToValidTree(out Node root);
-                root.CalculateValue();
 
                 if (bestFitness <= MinAcceptableFitness)
                     return bestFitness;

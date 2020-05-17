@@ -16,11 +16,11 @@ namespace HalalAssignement.Implementations
             functionA = new FunctionApproximation();
             functionA.LoadKnownValuesFromFile(path);
 
-            int headSize = 30;
+            int headSize = 50;
             gp = new GeneticProgramming(gen, headSize, new string[] { "x" });
-            gp.PopSize = 100000;
+            gp.PopSize = 10000;
             gp.ElitismCount = 10;
-            gp.MateCount = 10;
+            gp.MateCount = 15;
             gp.MutationCount = 1000;
             gp.Inputs = functionA.knownValues;
         }
