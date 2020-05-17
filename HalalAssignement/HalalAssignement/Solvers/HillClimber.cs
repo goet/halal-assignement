@@ -24,6 +24,8 @@ namespace HalalAssignement.Solvers
                 if (FitnessEval(p, q))
                     p = q;
 
+                Console.WriteLine($"{i}: current fitness: {Fitness(p)}");
+
                 i++;
             }
             return p;

@@ -53,7 +53,7 @@ namespace HalalAssignement.Solvers
                 var survivors = SelectMates();
                 var elites = GetElites();
                 survivors.AddRange(elites);
-                Reproduce(survivors);
+                population = Reproduce(survivors);
                 Mutate();
             }
 
@@ -114,8 +114,8 @@ namespace HalalAssignement.Solvers
                 {
                     if (possibleMates[i].Fitness < possibleMates[j].Fitness)
                         mates.Add(possibleMates[i]);
-                    else
-                        mates.Add(possibleMates[j]);
+                    //else
+                    //    mates.Add(possibleMates[j]);
                 }
             }
 

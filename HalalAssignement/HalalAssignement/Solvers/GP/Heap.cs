@@ -84,6 +84,11 @@ namespace HalalAssignement.Solvers.GP
             {
                 sb.Append($"|{item.ToString()}|");
             }
+            sb.Append("\n\ttail:");
+            foreach (var item in Tail)
+            {
+                sb.Append($"|{item.ToString()}|");
+            }
 
             return sb.ToString();
         }

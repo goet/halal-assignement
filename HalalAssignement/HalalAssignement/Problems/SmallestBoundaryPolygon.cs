@@ -54,7 +54,7 @@ namespace HalalAssignement.Problems
             return BoundaryLength(solution);
         }
 
-        protected double Constraint(List<Vector2> solution)
+        public double Constraint(List<Vector2> solution)
         {
             return -OuterDistanceToBoundary(solution);
         }

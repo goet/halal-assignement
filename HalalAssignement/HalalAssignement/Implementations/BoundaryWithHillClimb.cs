@@ -12,6 +12,7 @@ namespace HalalAssignement.Implementations
         public Vector2 HighestPoint { get; set; } = new Vector2(1000, 1000);
 
         public double Result { get; set; }
+        public double OriginalLength { get; set; }
 
         private SmallestBoundaryPolygon smallestBoundary;
         private HillClimber<List<Vector2>> hillClimb;
@@ -24,8 +25,8 @@ namespace HalalAssignement.Implementations
             hillClimb = new HillClimber<List<Vector2>>();
 
             hillClimb.gen = gen;
-            hillClimb.Epsilon = Math.PI;
-            hillClimb.MaxIterations = 100;
+            hillClimb.Epsilon = 10;
+            hillClimb.MaxIterations = 1000;
 
             hillClimb.Fitness = (solution) => smallestBoundary.Objective(solution);
             hillClimb.LowerFitnessIsBetter();
@@ -35,12 +36,25 @@ namespace HalalAssignement.Implementations
                 var points = new List<Vector2>();
                 double rangeX = HighestPoint.X - LowestPoint.X;
                 double rangeY = HighestPoint.Y - LowestPoint.Y;
+
                 foreach (var point in smallestBoundary.points)
                 {
                     var x = (gen.NextDouble() * rangeX) + LowestPoint.X;
                     var y = (gen.NextDouble() * rangeY) + LowestPoint.Y;
                     points.Add(new Vector2((float)x, (float)y));
                 }
+
+                while (smallestBoundary.Constraint(points) < 0)
+                {
+                    points.Clear();
+                    foreach (var point in smallestBoundary.points)
+                    {
+                        var x = (gen.NextDouble() * rangeX) + LowestPoint.X;
+                        var y = (gen.NextDouble() * rangeY) + LowestPoint.Y;
+                        points.Add(new Vector2((float)x, (float)y));
+                    }
+                }
+
                 return points;
             };
 
@@ -55,6 +69,8 @@ namespace HalalAssignement.Implementations
 
                     v = Vector2.Normalize(v);
                     v *= (float)hillClimb.Epsilon;
+                    v += point;
+
                     newState.Add(v);
                 }
                 return newState;
@@ -65,6 +81,7 @@ namespace HalalAssignement.Implementations
         {
             var solution = hillClimb.Solve();
             Result = smallestBoundary.Objective(solution);
+            OriginalLength = smallestBoundary.Objective(smallestBoundary.points);
             return Result;
         }
     }
